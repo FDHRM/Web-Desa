@@ -1,6 +1,24 @@
 import { createClient } from "@supabase/supabase-js";
 
-let cachedClient: ReturnType<typeof createClient> | null = null;
+export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
+
+// Minimal schema typing so the Supabase client knows the shape of our one
+// table. Without this, @supabase/supabase-js falls back to `never` for
+// insert/update payloads, which fails `tsc` during `next build` (even though
+// `next dev` doesn't always catch it).
+export type Database = {
+  public: {
+    Tables: {
+      site_data: {
+        Row: { id: number; data: Json; updated_at: string };
+        Insert: { id: number; data: Json; updated_at?: string };
+        Update: { id?: number; data?: Json; updated_at?: string };
+      };
+    };
+  };
+};
+
+let cachedClient: ReturnType<typeof createClient<Database>> | null = null;
 
 /**
  * Server-only Supabase client using the service role key. This bypasses Row
@@ -22,7 +40,7 @@ export function getSupabaseServerClient() {
     );
   }
 
-  cachedClient = createClient(url, serviceRoleKey, {
+  cachedClient = createClient<Database>(url, serviceRoleKey, {
     auth: { persistSession: false },
   });
   return cachedClient;

@@ -1,4 +1,4 @@
-import { getSupabaseServerClient } from "@/lib/supabase";
+import { getSupabaseServerClient, type Json } from "@/lib/supabase";
 
 export type Perangkat = { id: string; nama: string; jabatan: string; foto: string };
 export type Berita = {
@@ -126,19 +126,21 @@ export async function readDb(): Promise<DbShape> {
     // First run against a fresh database: seed it so the app has something to show.
     const { error: insertError } = await supabase
       .from(TABLE)
-      .insert({ id: ROW_ID, data: DEFAULT_DB });
+      .insert({ id: ROW_ID, data: DEFAULT_DB as unknown as Json });
     if (insertError) {
       throw new Error(`Gagal membuat data awal di Supabase: ${insertError.message}`);
     }
     return DEFAULT_DB;
   }
 
-  return data.data as DbShape;
+  return data.data as unknown as DbShape;
 }
 
 export async function writeDb(data: DbShape): Promise<void> {
   const supabase = getSupabaseServerClient();
-  const { error } = await supabase.from(TABLE).upsert({ id: ROW_ID, data });
+  const { error } = await supabase
+    .from(TABLE)
+    .upsert({ id: ROW_ID, data: data as unknown as Json });
   if (error) {
     throw new Error(`Gagal menyimpan data ke Supabase: ${error.message}`);
   }
