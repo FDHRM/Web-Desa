@@ -123,7 +123,6 @@ export async function readDb(): Promise<DbShape> {
   }
 
   if (!data) {
-    // First run against a fresh database: seed it so the app has something to show.
     const { error: insertError } = await supabase
       .from(TABLE)
       .insert({ id: ROW_ID, data: DEFAULT_DB as unknown as Json });
