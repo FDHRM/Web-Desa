@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { readDb } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   const db = await readDb();
 

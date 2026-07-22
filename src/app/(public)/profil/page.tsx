@@ -2,6 +2,8 @@ import Image from "next/image";
 import { readDb } from "@/lib/db";
 import PageHeader from "@/components/PageHeader";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = { title: "Profil Desa" };
 
 export default async function ProfilPage() {

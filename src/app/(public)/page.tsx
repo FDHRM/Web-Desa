@@ -3,6 +3,8 @@ import Image from "next/image";
 import { readDb } from "@/lib/db";
 import HeroSlideshow from "@/components/HeroSlideshow";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const db = await readDb();
   const beritaTerbaru = [...db.berita]

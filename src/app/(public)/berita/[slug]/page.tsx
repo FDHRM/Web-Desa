@@ -2,6 +2,8 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { readDb } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function BeritaDetailPage({
   params,
 }: {

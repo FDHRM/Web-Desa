@@ -2,6 +2,10 @@ import { createClient } from "@supabase/supabase-js";
 
 export type Json = string | number | boolean | null | { [key: string]: Json } | Json[];
 
+// Minimal schema typing so the Supabase client knows the shape of our one
+// table. Without this, @supabase/supabase-js falls back to `never` for
+// insert/update payloads, which fails `tsc` during `next build` (even though
+// `next dev` doesn't always catch it).
 export type Database = {
   public: {
     Tables: {
@@ -21,6 +25,13 @@ export type Database = {
 
 let cachedClient: ReturnType<typeof createClient<Database>> | null = null;
 
+/**
+ * Server-only Supabase client using the service role key. This bypasses Row
+ * Level Security, so it must NEVER be imported into a "use client" component
+ * or exposed to the browser — only use it inside Route Handlers, Server
+ * Components, and other server-side code (which is exactly how this project
+ * uses it: from src/lib/db.ts and the upload route).
+ */
 export function getSupabaseServerClient() {
   if (cachedClient) return cachedClient;
 

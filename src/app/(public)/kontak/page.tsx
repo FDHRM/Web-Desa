@@ -1,6 +1,8 @@
 import { readDb } from "@/lib/db";
 import PageHeader from "@/components/PageHeader";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = { title: "Kontak Desa" };
 
 export default async function KontakPage() {

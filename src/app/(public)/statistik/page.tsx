@@ -2,6 +2,8 @@ import { readDb } from "@/lib/db";
 import StatBar from "@/components/StatBar";
 import PageHeader from "@/components/PageHeader";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = { title: "Statistik Penduduk" };
 
 export default async function StatistikPage() {

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { readDb, writeDb, genId, slugify } from "@/lib/db";
 import { requireAuth } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const db = await readDb();
   return NextResponse.json(db.berita);
