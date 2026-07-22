@@ -119,7 +119,7 @@ export default async function HomePage() {
 
         {beritaTerbaru.length === 0 ? (
           <p className="rounded-lg border border-dashed border-navy-700/20 p-8 text-center text-sm text-ink/60">
-            Belum ada berita. Tambahkan lewat halaman Admin &gt; Berita.
+            Belum ada berita.
           </p>
         ) : (
           <div className="grid gap-6 md:grid-cols-3">
