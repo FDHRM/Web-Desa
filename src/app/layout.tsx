@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { readDb } from "@/lib/db";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -20,10 +21,18 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
-export const metadata: Metadata = {
-  title: "Website Desa",
-  description: "Situs resmi informasi dan layanan desa",
-};
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { profil } = await readDb();
+  return {
+    title: profil.namaDesa || "Website Desa",
+    description: profil.tagline || "Situs resmi informasi dan layanan desa",
+    // Pakai logo yang diupload lewat Admin > Profil Desa sebagai favicon (ikon tab
+    // browser). Kalau logo belum diisi, browser otomatis fallback ke ikon default.
+    icons: profil.logoUrl ? [{ url: profil.logoUrl }] : undefined,
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
