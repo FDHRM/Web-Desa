@@ -59,6 +59,7 @@ export type DbShape = {
     telepon: string;
     email: string;
     jamLayanan: string;
+    mapsEmbedUrl: string;
   };
 };
 
@@ -108,6 +109,7 @@ const DEFAULT_DB: DbShape = {
     telepon: "-",
     email: "-",
     jamLayanan: "Senin - Jumat, 08.00 - 15.00",
+    mapsEmbedUrl: "",
   },
 };
 

@@ -17,19 +17,7 @@ export default async function KontakPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Hubungi Kami"
-        title="Kontak"
-        description={
-          <>
-            Peta lokasi kantor desa bisa dilihat di halaman{" "}
-            <a href="/profil" className="underline hover:text-kertas">
-              Profil Desa
-            </a>
-            .
-          </>
-        }
-      />
+      <PageHeader eyebrow="Hubungi Kami" title="Kontak" />
 
       <div className="mx-auto max-w-3xl px-5 py-16">
         <div className="animate-fade-up rounded-lg border border-navy-700/10 bg-white p-6 shadow-sm">
@@ -45,6 +33,27 @@ export default async function KontakPage() {
               </div>
             ))}
           </dl>
+        </div>
+
+        <div
+          className="animate-fade-up mt-8 rounded-lg border border-navy-700/10 bg-white p-5 shadow-sm"
+          style={{ animationDelay: "160ms", animationFillMode: "backwards" }}
+        >
+          <h3 className="font-display text-lg font-semibold text-ink">Peta Lokasi Kantor Desa</h3>
+          {kontak.mapsEmbedUrl ? (
+            <div className="mt-4 overflow-hidden rounded-lg">
+              <iframe
+                src={kontak.mapsEmbedUrl}
+                className="h-[350px] w-full"
+                loading="lazy"
+                title="Peta Lokasi Kantor Desa"
+              />
+            </div>
+          ) : (
+            <div className="mt-4 flex min-h-[180px] items-center justify-center rounded-lg border border-dashed border-navy-700/20 text-sm text-ink/50">
+              Peta lokasi kantor desa belum diatur oleh admin.
+            </div>
+          )}
         </div>
       </div>
     </div>

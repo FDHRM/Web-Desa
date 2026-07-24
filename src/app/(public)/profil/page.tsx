@@ -79,7 +79,7 @@ export default async function ProfilPage() {
             className="animate-fade-up mt-10 rounded-lg border border-navy-700/10 bg-white p-5 shadow-sm"
             style={{ animationDelay: "240ms", animationFillMode: "backwards" }}
           >
-            <h3 className="font-display text-lg font-semibold text-ink">Peta Lokasi</h3>
+            <h3 className="font-display text-lg font-semibold text-ink">Peta Wilayah Desa</h3>
             {profil.mapsEmbedUrl ? (
               <div className="mt-4 overflow-hidden rounded-lg">
                 <iframe

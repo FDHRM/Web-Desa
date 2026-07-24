@@ -70,23 +70,26 @@ export default function Navbar({ namaDesa }: { namaDesa: string }) {
       </div>
 
       <div
-        className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out md:hidden ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`absolute left-0 right-0 top-full border-t border-navy-700/10 bg-kertas shadow-lg transition-all duration-300 ease-in-out md:hidden ${
+          open ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
         }`}
       >
-        <nav className="flex flex-col gap-1 border-t border-navy-700/10 px-5 py-3">
-          {open &&
-            links.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="focus-ring animate-fade-up rounded-md px-3 py-2 text-sm font-medium text-ink/80 hover:bg-navy-100"
-                style={{ animationDelay: `${i * 40}ms`, animationFillMode: "backwards" }}
-              >
-                {link.label}
-              </Link>
-            ))}
+        <nav className="flex flex-col gap-1 px-5 py-3">
+          {links.map((link, i) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setOpen(false)}
+              className="focus-ring rounded-md px-3 py-2 text-sm font-medium text-ink/80 hover:bg-navy-100"
+              style={
+                open
+                  ? { transitionDelay: `${i * 30}ms` }
+                  : undefined
+              }
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>

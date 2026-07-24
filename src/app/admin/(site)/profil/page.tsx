@@ -129,7 +129,7 @@ export default function AdminProfilPage() {
 
         <div>
           <label className="mb-1 block text-sm font-medium text-ink/80">
-            URL Embed Google Maps (opsional)
+            URL Embed Google Maps — Wilayah Desa (opsional)
           </label>
           <input
             value={data.mapsEmbedUrl}
@@ -138,8 +138,13 @@ export default function AdminProfilPage() {
             className="focus-ring w-full rounded-md border border-navy-700/20 px-3 py-2 text-sm"
           />
           <p className="mt-1 text-xs text-ink/50">
-            Buka Google Maps → cari lokasi → Bagikan → Sematkan peta → salin URL dari atribut src.
-            Peta ini akan tampil di bagian Geografis Desa pada halaman Profil.
+            Peta batas/wilayah desa secara umum. Buka Google Maps → cari lokasi → Bagikan →
+            Sematkan peta → salin URL dari atribut src. Tampil di bagian Geografis Desa pada
+            halaman Profil. Untuk peta lokasi kantor desa, isi di menu{" "}
+            <a href="/admin/kontak" className="underline hover:text-navy-700">
+              Admin &gt; Kontak
+            </a>
+            .
           </p>
         </div>
 

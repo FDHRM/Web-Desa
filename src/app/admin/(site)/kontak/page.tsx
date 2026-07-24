@@ -7,6 +7,7 @@ type Kontak = {
   telepon: string;
   email: string;
   jamLayanan: string;
+  mapsEmbedUrl: string;
 };
 
 export default function AdminKontakPage() {
@@ -75,13 +76,22 @@ export default function AdminKontakPage() {
             className="focus-ring w-full rounded-md border border-navy-700/20 px-3 py-2 text-sm"
           />
         </div>
-        <p className="text-xs text-ink/50">
-          Untuk mengatur peta lokasi, buka menu{" "}
-          <a href="/admin/profil" className="underline hover:text-navy-700">
-            Admin &gt; Profil Desa
-          </a>
-          .
-        </p>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-ink/80">
+            URL Embed Google Maps — Lokasi Kantor Desa (opsional)
+          </label>
+          <input
+            value={data.mapsEmbedUrl}
+            onChange={(e) => setData({ ...data, mapsEmbedUrl: e.target.value })}
+            placeholder="https://www.google.com/maps/embed?..."
+            className="focus-ring w-full rounded-md border border-navy-700/20 px-3 py-2 text-sm"
+          />
+          <p className="mt-1 text-xs text-ink/50">
+            Peta titik lokasi kantor desa (beda dari peta wilayah/batas desa). Buka Google Maps →
+            cari lokasi kantor → Bagikan → Sematkan peta → salin URL dari atribut src. Tampil di
+            halaman Kontak.
+          </p>
+        </div>
 
         <div className="flex items-center gap-3">
           <button
