@@ -8,6 +8,7 @@ export default async function DashboardPage() {
 
   const cards = [
     { label: "Berita", value: db.berita.length, href: "/admin/berita" },
+    { label: "Layanan Publik", value: db.layanan.length, href: "/admin/layanan" },
     { label: "Potensi Desa", value: db.potensi.length, href: "/admin/potensi" },
     { label: "Perangkat Desa", value: db.perangkat.length, href: "/admin/perangkat" },
     { label: "UMKM", value: db.umkm.length, href: "/admin/umkm" },
@@ -23,7 +24,7 @@ export default async function DashboardPage() {
         Kelola seluruh konten website {db.profil.namaDesa} dari sini.
       </p>
 
-      <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+      <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
         {cards.map((c) => (
           <Link
             key={c.label}

@@ -57,6 +57,7 @@ export default async function HomePage() {
             >
               {[
                 { href: "/profil", label: "Profil Desa" },
+                { href: "/layanan", label: "Layanan Publik" },
                 { href: "/berita", label: "Berita" },
                 { href: "/potensi", label: "Potensi Desa" },
                 { href: "/umkm", label: "UMKM" },

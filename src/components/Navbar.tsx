@@ -8,6 +8,7 @@ const links = [
   { href: "/", label: "Beranda" },
   { href: "/profil", label: "Profil" },
   { href: "/statistik", label: "Statistik" },
+  { href: "/layanan", label: "Layanan Publik" },
   { href: "/berita", label: "Berita" },
   { href: "/potensi", label: "Potensi Desa" },
   { href: "/umkm", label: "UMKM" },

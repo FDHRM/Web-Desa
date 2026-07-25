@@ -8,6 +8,7 @@ const links = [
   { href: "/admin/profil", label: "Profil Desa" },
   { href: "/admin/perangkat", label: "Perangkat Desa" },
   { href: "/admin/statistik", label: "Statistik" },
+  { href: "/admin/layanan", label: "Layanan Publik" },
   { href: "/admin/berita", label: "Berita" },
   { href: "/admin/potensi", label: "Potensi Desa" },
   { href: "/admin/umkm", label: "UMKM" },

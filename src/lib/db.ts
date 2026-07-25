@@ -26,6 +26,11 @@ export type Potensi = {
   deskripsi: string;
   foto: string;
 };
+export type LayananSurat = {
+  id: string;
+  judul: string;
+  deskripsi: string;
+};
 export type StatistikRow = { nama?: string; jenis?: string; rentang?: string; jumlah: number };
 
 export type DbShape = {
@@ -54,6 +59,7 @@ export type DbShape = {
   galeri: GaleriItem[];
   umkm: Umkm[];
   potensi: Potensi[];
+  layanan: LayananSurat[];
   kontak: {
     alamat: string;
     telepon: string;
@@ -104,6 +110,17 @@ const DEFAULT_DB: DbShape = {
   galeri: [],
   umkm: [],
   potensi: [],
+  layanan: [
+    { id: "1", judul: "Surat Pengantar KTP / KK", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "2", judul: "Surat Keterangan Usaha", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "3", judul: "Surat Keterangan Domisili", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "4", judul: "Surat Keterangan Tidak Mampu (SKTM)", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "5", judul: "Surat Pengantar Nikah (N1-N4)", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "6", judul: "Surat Keterangan Kelahiran / Kematian", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "7", judul: "Surat Keterangan Waris", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "8", judul: "Surat Pengantar Lokal", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+    { id: "9", judul: "Surat Pengantar SKCK", deskripsi: "Tuliskan persyaratan dan cara mengurusnya di sini." },
+  ],
   kontak: {
     alamat: "Jl. Contoh No. 1, Desa Karangjaya",
     telepon: "-",
@@ -135,7 +152,15 @@ export async function readDb(): Promise<DbShape> {
     return DEFAULT_DB;
   }
 
-  return data.data as unknown as DbShape;
+  const result = data.data as unknown as DbShape;
+  // Backward-compatible migration: existing rows created before this field
+  // existed won't have it yet. Backfill it in-memory (and persist once) so
+  // older data doesn't need a manual reset.
+  if (!Array.isArray(result.layanan)) {
+    result.layanan = DEFAULT_DB.layanan;
+    await writeDb(result);
+  }
+  return result;
 }
 
 export async function writeDb(data: DbShape): Promise<void> {
