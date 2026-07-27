@@ -62,6 +62,7 @@ export type DbShape = {
   layanan: LayananSurat[];
   kontak: {
     alamat: string;
+    alamatFooter: string;
     telepon: string;
     email: string;
     jamLayanan: string;
@@ -123,6 +124,7 @@ const DEFAULT_DB: DbShape = {
   ],
   kontak: {
     alamat: "Jl. Contoh No. 1, Desa Karangjaya",
+    alamatFooter: "Jl. Contoh No. 1, Desa Karangjaya",
     telepon: "-",
     email: "-",
     jamLayanan: "Senin - Jumat, 08.00 - 15.00",
@@ -153,11 +155,21 @@ export async function readDb(): Promise<DbShape> {
   }
 
   const result = data.data as unknown as DbShape;
-  // Backward-compatible migration: existing rows created before this field
-  // existed won't have it yet. Backfill it in-memory (and persist once) so
+  // Backward-compatible migrations: existing rows created before these fields
+  // existed won't have them yet. Backfill in-memory (and persist once) so
   // older data doesn't need a manual reset.
+  let needsSave = false;
   if (!Array.isArray(result.layanan)) {
     result.layanan = DEFAULT_DB.layanan;
+    needsSave = true;
+  }
+  if (typeof result.kontak.alamatFooter !== "string") {
+    // Default the new footer-only address to whatever the existing contact
+    // address already is, so the footer doesn't suddenly go blank.
+    result.kontak.alamatFooter = result.kontak.alamat || DEFAULT_DB.kontak.alamatFooter;
+    needsSave = true;
+  }
+  if (needsSave) {
     await writeDb(result);
   }
   return result;

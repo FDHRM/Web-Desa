@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 type Kontak = {
   alamat: string;
+  alamatFooter: string;
   telepon: string;
   email: string;
   jamLayanan: string;
@@ -42,13 +43,30 @@ export default function AdminKontakPage() {
 
       <form onSubmit={handleSave} className="mt-6 space-y-4 rounded-lg border border-navy-700/10 bg-white p-5 shadow-sm">
         <div>
-          <label className="mb-1 block text-sm font-medium text-ink/80">Alamat</label>
+          <label className="mb-1 block text-sm font-medium text-ink/80">
+            Alamat (tampil di halaman Kontak)
+          </label>
           <textarea
             value={data.alamat}
             onChange={(e) => setData({ ...data, alamat: e.target.value })}
             rows={2}
             className="focus-ring w-full rounded-md border border-navy-700/20 px-3 py-2 text-sm"
           />
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-ink/80">
+            Alamat (tampil di footer semua halaman)
+          </label>
+          <textarea
+            value={data.alamatFooter}
+            onChange={(e) => setData({ ...data, alamatFooter: e.target.value })}
+            rows={2}
+            className="focus-ring w-full rounded-md border border-navy-700/20 px-3 py-2 text-sm"
+          />
+          <p className="mt-1 text-xs text-ink/50">
+            Terpisah dari alamat di atas — boleh diisi sama, atau versi lebih singkat khusus untuk
+            footer.
+          </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>

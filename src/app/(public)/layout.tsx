@@ -10,7 +10,7 @@ export default async function PublicLayout({ children }: { children: React.React
     <div className="flex min-h-screen flex-col">
       <Navbar namaDesa={db.profil.namaDesa} />
       <main className="flex-1">{children}</main>
-      <Footer namaDesa={db.profil.namaDesa} alamat={db.kontak.alamat} />
+      <Footer namaDesa={db.profil.namaDesa} alamat={db.kontak.alamatFooter} />
     </div>
   );
 }
